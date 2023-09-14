@@ -27,7 +27,7 @@ struct Event {
 
 fn main() {
 
-    let song = parse_midi_file("jazz2a.mid");
+    let song = parse_midi_file("Fur Elise.mid");
 
     println!("Format: {}", song.format);
     println!("Number Of Tracks: {}", song.format);
@@ -48,28 +48,6 @@ fn main() {
             println!("At: {}, {}, Channel: {}, Key: {}, Velocity: {}", event.time, event.action, event.channel, event.key, event.velocity)
         }
     }
-    // let hex = get_hex("Fur Elise.mid");
-    // let chunks = get_chunks(hex);
-
-
-    // for chunk in &chunks {
-    //     println!("{}", chunk.len());
-    //     for hex in chunk[6..].to_vec() {
-    //         print!("{} ", hex)
-    //     }
-    //     println!();
-    //     println!();
-    //     println!();
-    // }
-
-
-    // for chunk in chunks {
-    //     if chunk[0] == "68" && chunk[1] == "64" { // Header Chunk
-    //         parse_header(chunk)
-    //     } else if chunk[0] == "72" && chunk[1] == "6B" {
-    //         parse_track(chunk)
-    //     }
-    // }
     
 }
 
@@ -82,7 +60,7 @@ fn parse_midi_file(file_path: &str) -> Song {
     for chunk in chunks {
         if chunk[0] == "68" && chunk[1] == "64" { // Header Chunk
             song = parse_header(chunk, song)
-        } else if chunk[0] == "72" && chunk[1] == "6B" {
+        } else if chunk[0] == "72" && chunk[1] == "6B" { // Track Chunk
             song.tracks.push(parse_track(chunk))
         }
     }
@@ -145,7 +123,10 @@ fn parse_header(chunk: Vec<String>, mut song: Song) -> Song {
 
 
 
-fn parse_track(chunk: Vec<String>) -> Track {
+fn parse_track(oversized_chunk: Vec<String>) -> Track {
+    let chunk = oversized_chunk[6..].to_vec();
+    
+    
     let mut track = Track {name: "".to_string(), instrument: "".to_string(), channel: 0, tempo: 0, events: Vec::new()};
 
     let mut start_index = 0;
@@ -196,6 +177,7 @@ fn parse_track(chunk: Vec<String>) -> Track {
             time_finished = false;
             track = parse_event(chunk[start_index..=index].to_vec(), track);
             start_index = index + 1;
+            continue;
         } else if element == "FF" {
             let next = chunk.get(index+1).unwrap();
             if next == "00" {
@@ -221,7 +203,9 @@ fn parse_track(chunk: Vec<String>) -> Track {
                 println!("{}", next)
             }
         } else {
+            println!("{:?}", chunk[start_index..index].to_vec());
             println!("{}", element);
+            println!();
         }
 
 
@@ -233,7 +217,7 @@ fn parse_track(chunk: Vec<String>) -> Track {
 fn parse_event(event_hex: Vec<String>, mut track: Track) -> Track {
 
     let mut event = Event {time: 0, action: "".to_string(), channel: 0, key: 0, velocity: 0};
-    let mut time_string: String = "".to_string();
+    let mut time: i64 = 0;
     let mut time_finished = false;
 
     for (index, element) in event_hex.iter().enumerate() {
@@ -241,21 +225,27 @@ fn parse_event(event_hex: Vec<String>, mut track: Track) -> Track {
         let Ok(decimal) = i64::from_str_radix(element, 16) else {panic!()};
         
         if !time_finished {
-            time_string.push_str(element);
+            let Ok(hex_val) = i64::from_str_radix(element, 16) else {panic!()};
+            
+
             time_finished = decimal < 128;
             if time_finished {
-                let Ok(time) = i64::from_str_radix(&time_string, 16) else {panic!()};
+                time = time * 128 + hex_val;
                 event.time = time;
+            } else {
+                time = time * 128 + hex_val - 128;
             }
             continue;
         }
 
-        let Ok(channel) = i64::from_str_radix(&element.chars().last().unwrap().to_string(), 16) else {panic!()};
-        let Ok(key) = i64::from_str_radix(event_hex.get(index+1).unwrap(), 16) else {panic!()};
-        let Ok(velocity) = i64::from_str_radix(event_hex.get(index+2).unwrap(), 16) else {panic!()};
+        
             
 
         if element.starts_with("8") {
+            let Ok(channel) = i64::from_str_radix(&element.chars().last().unwrap().to_string(), 16) else {panic!()};
+            let Ok(key) = i64::from_str_radix(event_hex.get(index+1).unwrap(), 16) else {panic!()};
+            let Ok(velocity) = i64::from_str_radix(event_hex.get(index+2).unwrap(), 16) else {panic!()};
+          
             event.channel = channel;
             event.key = key;
             event.velocity = velocity;
@@ -263,6 +253,10 @@ fn parse_event(event_hex: Vec<String>, mut track: Track) -> Track {
             track.events.push(event);
             break;
         } else if element.starts_with("9") {
+            let Ok(channel) = i64::from_str_radix(&element.chars().last().unwrap().to_string(), 16) else {panic!()};
+            let Ok(key) = i64::from_str_radix(event_hex.get(index+1).unwrap(), 16) else {panic!()};
+            let Ok(velocity) = i64::from_str_radix(event_hex.get(index+2).unwrap(), 16) else {panic!()};
+
             event.channel = channel;
             event.key = key;
             event.velocity = velocity;
@@ -270,6 +264,10 @@ fn parse_event(event_hex: Vec<String>, mut track: Track) -> Track {
             track.events.push(event);
             break;
         } else if element.starts_with("A") {
+            let Ok(channel) = i64::from_str_radix(&element.chars().last().unwrap().to_string(), 16) else {panic!()};
+            let Ok(key) = i64::from_str_radix(event_hex.get(index+1).unwrap(), 16) else {panic!()};
+            let Ok(velocity) = i64::from_str_radix(event_hex.get(index+2).unwrap(), 16) else {panic!()};
+
             event.channel = channel;
             event.key = key;
             event.velocity = velocity;
@@ -277,6 +275,10 @@ fn parse_event(event_hex: Vec<String>, mut track: Track) -> Track {
             track.events.push(event);
             break;
         } else if element.starts_with("B") {
+            let Ok(channel) = i64::from_str_radix(&element.chars().last().unwrap().to_string(), 16) else {panic!()};
+            let Ok(key) = i64::from_str_radix(event_hex.get(index+1).unwrap(), 16) else {panic!()};
+            let Ok(velocity) = i64::from_str_radix(event_hex.get(index+2).unwrap(), 16) else {panic!()};
+
             event.channel = channel;
             event.key = key;
             event.velocity = velocity;
@@ -295,9 +297,11 @@ fn parse_event(event_hex: Vec<String>, mut track: Track) -> Track {
             } else if next == "20" {
                 let Ok(channel) = i64::from_str_radix(event_hex.get(index+3).unwrap(), 16) else {panic!()};
                 track.channel = channel;
+                break;
             } else if next == "51" {
                 let Ok(tempo) = i64::from_str_radix(event_hex.get(index+3).unwrap(), 16) else {panic!()};
                 track.tempo = tempo;
+                break;
             }
         }
         break;
