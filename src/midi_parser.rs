@@ -25,7 +25,7 @@ struct Event {
     velocity: i64
 }
 
-fn main() {
+fn old_main() {
 
     let song = parse_midi_file("Fur Elise.mid");
 
