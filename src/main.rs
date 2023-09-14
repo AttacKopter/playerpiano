@@ -3,7 +3,8 @@ use pwm_pca9685::{Address, Channel, Pca9685};
 
 fn main() {
     let dev = I2cdev::new("/dev/i2c-1").unwrap();
-    let address = Address::default();
+    let (a5, a4, a3, a2, a1, a0) = (false, false, false, false, false, false);
+    let address = (a5, a4, a3, a2, a1, a0);
     let mut pwm = Pca9685::new(dev, address).unwrap();
     pwm.set_prescale(100).unwrap();
     pwm.enable().unwrap();
