@@ -1,0 +1,14 @@
+C:\Users\maxim\OneDrive\Desktop\playerpiano\target\debug\deps\midly-c0fab64771d0d632.rmeta: C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\lib.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\error.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\arena.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\event.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\io.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\live.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\primitive.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\riff.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\smf.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\stream.rs
+
+C:\Users\maxim\OneDrive\Desktop\playerpiano\target\debug\deps\midly-c0fab64771d0d632.d: C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\lib.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\error.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\arena.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\event.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\io.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\live.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\primitive.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\riff.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\smf.rs C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\stream.rs
+
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\lib.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\error.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\arena.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\event.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\io.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\live.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\primitive.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\riff.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\smf.rs:
+C:\Users\maxim\.cargo\registry\src\github.com-1ecc6299db9ec823\midly-0.5.3\src\stream.rs:

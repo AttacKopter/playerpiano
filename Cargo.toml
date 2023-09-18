@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 
+midly = "0.5.3"
 pwm-pca9685 = "0.3.1"
 linux-embedded-hal = "0.3.2"
